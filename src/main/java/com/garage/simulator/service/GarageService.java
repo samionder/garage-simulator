@@ -66,9 +66,4 @@ public class GarageService {
 
 	}
 	
-	public static void main(String[] args) {
-		GarageService s = new GarageService();
-		s.test();
-	}
-
 }
