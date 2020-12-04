@@ -18,6 +18,11 @@ public class Slot {
 		return vehicle;
 	}
 
+	
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+	
 	public Status getStatus() {
 		return status;
 	}
@@ -26,9 +31,6 @@ public class Slot {
 		this.status = status;
 	}
 
-	public void assignCar(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
 
 	public void cleanSlot(int slotNumber) {
 		this.vehicle = null;
@@ -36,9 +38,17 @@ public class Slot {
 		this.slotNumber = slotNumber;
 	}
 	
+	public void fill(Vehicle vehicle, Status status) {
+		this.vehicle = vehicle;
+		this.status = status;
+	}
+	
 	public boolean isAllocated() {
 		return status==Status.ALLOCATED;
 	}
 	
+	public boolean isNotEmpty() {
+		return status != Status.FREE;
+	}
 	
 }

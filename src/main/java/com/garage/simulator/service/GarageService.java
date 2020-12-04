@@ -47,20 +47,28 @@ public class GarageService {
 	public void test() {
 		System.out.println("TEST SERVICE");
 		String input1 = "park 34-SO-1988 Black Car";
-		String input2 = "park 34-SO-1988 Black Car";
-		String input3 = "park 34-BO-1987 Red Truck";
-		String input6 = "park 34-BO-1987 Red Truck";
-		String input4 = "status";
-		String input5 = "leave 1";
+		String input2 = "park 34-BO-1987 Red Truck";
+		String input3 = "park 34-VO-2018 Blue Jeep";
+		String input4 = "park 34-HBO-2020 Black Truck";
+
+		String input5 = "status";
+		String input6 = "leave 3";
+		
+		String input7= "park 34-LO-2000 White Car";
+		
 
 		apply(input1);
 		apply(input2);
 		apply(input3);
-		apply(input6);
-		apply(input6);
 		apply(input4);
 		apply(input5);
-		apply(input4);
+		apply(input6);
+
+	}
+	
+	public static void main(String[] args) {
+		GarageService s = new GarageService();
+		s.test();
 	}
 
 }

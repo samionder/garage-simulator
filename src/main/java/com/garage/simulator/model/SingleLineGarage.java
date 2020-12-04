@@ -25,9 +25,16 @@ public class SingleLineGarage implements Garage {
 	public boolean park(Vehicle vehicle) {
 		List<Slot> availableSlots = getAvailableSlots(vehicle.getSize());
 		if (!availableSlots.isEmpty()) {
-			availableSlots.forEach(slot -> {
-				slot.assignCar(vehicle);
-				slot.setStatus(Status.ALLOCATED);
+			availableSlots.stream()
+			.limit(vehicle.size)
+			.forEach(slot -> {
+				slot.fill(vehicle, Status.ALLOCATED);
+			});
+			
+			availableSlots.stream()
+			.skip(vehicle.size)
+			.forEach(s->{
+				s.fill(vehicle,Status.NOT_AVAILABLE);
 			});
 			
 			vehicles.put(vehicles.size() + 1, vehicle);
@@ -43,7 +50,7 @@ public class SingleLineGarage implements Garage {
 		Vehicle vehicle = vehicles.get(ticketID);
 		
 		List<Slot> allocatedSlot = slots.stream()
-			.filter(Slot::isAllocated)
+			.filter(Slot::isNotEmpty)
 			.filter(slot -> slot.getVehicle().getRegistrationNumber().equals(vehicle.getRegistrationNumber()))
 			.collect(Collectors.toList());
 		
@@ -54,7 +61,7 @@ public class SingleLineGarage implements Garage {
 			
 			vehicles.remove(ticketID);
 			
-			return allocatedSlot.size();
+			return allocatedSlot.size()-1;
 	}
 	
 	
@@ -65,7 +72,7 @@ public class SingleLineGarage implements Garage {
 		for (Slot slot : slots) {
 			if (slot.getStatus() == Status.FREE) {
 				availbleSlots.add(slot);
-				if (availbleSlots.size() == requiredSpace)
+				if (availbleSlots.size() == requiredSpace+1)
 					return availbleSlots;
 			} else {
 				availbleSlots = new ArrayList<>();
@@ -82,7 +89,6 @@ public class SingleLineGarage implements Garage {
 				.filter(Slot::isAllocated)
 				.collect(Collectors.toList());
 	}
-	
 	
 	
 

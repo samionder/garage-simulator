@@ -30,7 +30,7 @@ public class GarrageParkingService {
 
 	public void leave(String id) {
 		int discardedSlot = garage.leave(id);
-		System.out.println("Allocate " + discardedSlot + " slot");
+		System.out.println("Cleaned " + discardedSlot + " slot");
 	}
 
 	public void status() {
